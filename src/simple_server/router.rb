@@ -10,6 +10,6 @@ end
 
 get '/' do
   picked_server = servers.sample
-  redirect picked_server
+  redirect "http://#{picked_server}"
 end
 

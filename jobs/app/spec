@@ -7,6 +7,12 @@ packages:
 - simple_server
 - ruby
 
+provides:
+- name: app
+  type: app
+  properties:
+  - port
+
 properties:
   port:
     description: "Port on which server is listening"

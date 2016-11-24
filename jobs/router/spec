@@ -8,6 +8,10 @@ packages:
 - simple_server
 - ruby
 
+consumes:
+- name: app
+  type: app
+
 properties:
   port:
     description: "Port on which server is listening"

@@ -1,0 +1,55 @@
+---
+name: learn-bosh-deployment
+
+director_uuid: "changeme"
+
+
+releases:
+- name: learn-bosh
+  version: latest
+
+
+
+stemcells:
+- alias: default
+  os: ubuntu-trusty
+  version: latest
+
+
+instance_groups:
+- name: app
+  instances: 1
+  azs: [default]
+  jobs:
+  - name: just_install_packages
+    release: learn-bosh
+  - name: app
+    release: learn-bosh
+    properties: 
+      port: "8080"
+  vm_type: default
+  stemcell: default
+  networks:
+  - name: default
+
+
+- name: router
+  instances: 1
+  azs: [default]
+  jobs:
+  - name: just_install_packages
+    release: learn-bosh
+  - name: router
+    release: learn-bosh
+    properties: 
+      port: "8090"
+  vm_type: default
+  stemcell: default
+  networks:
+  - name: default
+
+update:
+  canaries: 1
+  max_in_flight: 10
+  canary_watch_time: 1000-30000
+  update_watch_time: 1000-30000
